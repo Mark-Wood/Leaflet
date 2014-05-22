@@ -45,6 +45,12 @@ L.FeatureGroup = L.LayerGroup.extend({
 		this._popupOptions = options;
 		return this.invoke('bindPopup', content, options);
 	},
+    
+	unbindPopup: function () {
+		delete this._popupContent;
+		delete this._popupOptions;
+		return this.invoke('unbindPopup');
+	},
 
 	openPopup: function (latlng) {
 		// open popup on the first layer
