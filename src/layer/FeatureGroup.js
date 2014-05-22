@@ -33,8 +33,8 @@ L.FeatureGroup = L.LayerGroup.extend({
 
 		L.LayerGroup.prototype.removeLayer.call(this, layer);
 
-		if (this._popupContent) {
-			this.invoke('unbindPopup');
+		if (this._popupContent && layer.bindPopup) {
+			layer.unbindPopup();
 		}
 
 		return this.fire('layerremove', {layer: layer});
