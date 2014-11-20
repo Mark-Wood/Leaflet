@@ -89,6 +89,9 @@ L.Path = L.Browser.svg || !L.Browser.vml ? L.Path : L.Path.extend({
 			if (options.lineCap) {
 				stroke.endcap = options.lineCap.replace('butt', 'flat');
 			}
+			if (options.endArrow) {
+				stroke.endarrow = 'block';
+			}
 			if (options.lineJoin) {
 				stroke.joinstyle = options.lineJoin;
 			}

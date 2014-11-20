@@ -88,6 +88,9 @@ L.Path = L.Path.extend({
 			if (this.options.lineCap) {
 				this._path.setAttribute('stroke-linecap', this.options.lineCap);
 			}
+			if (this.options.endArrow) {
+				this._path.setAttribute('marker-end', 'url(#' + this.options.endArrow + ')');
+			}
 			if (this.options.lineJoin) {
 				this._path.setAttribute('stroke-linejoin', this.options.lineJoin);
 			}
@@ -163,6 +166,13 @@ L.Map.include({
 		if (!this._pathRoot) {
 			this._pathRoot = L.Path.prototype._createElement('svg');
 			this._panes.overlayPane.appendChild(this._pathRoot);
+			
+			var defs = L.Path.prototype._createElement('defs');
+			this._pathRoot.appendChild(defs);
+			
+			defs.appendChild(this._createMarkerArrow('leftMarkerArrow', '#483D8B'));
+			defs.appendChild(this._createMarkerArrow('rightMarkerArrow', '#2E8B57'));
+			defs.appendChild(this._createMarkerArrow('straightMarkerArrow', '#000'));
 
 			if (this.options.zoomAnimation && L.Browser.any3d) {
 				L.DomUtil.addClass(this._pathRoot, 'leaflet-zoom-animated');
@@ -226,5 +236,25 @@ L.Map.include({
 		if (L.Browser.mobileWebkit) {
 			pane.appendChild(root);
 		}
+	},
+	
+	_createMarkerArrow: function (id, color) {
+		var arrowMarker = L.Path.prototype._createElement('marker');
+		arrowMarker.id = id || 'markerArrow';
+		arrowMarker.setAttribute('markerWidth', '13');
+		arrowMarker.setAttribute('markerHeight', '13');
+		arrowMarker.setAttribute('refX', '10');
+		arrowMarker.setAttribute('refY', '6');
+		arrowMarker.setAttribute('orient', 'auto');
+		
+		var path = L.Path.prototype._createElement('path');
+		path.setAttribute('d', 'M2,2 L2,11 L10,6 L2,2');
+		if (color) { 
+			path.style.fill = color;
+		}
+		
+		arrowMarker.appendChild(path);
+		
+		return arrowMarker;
 	}
 });
