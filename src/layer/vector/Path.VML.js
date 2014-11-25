@@ -24,6 +24,24 @@ L.Path = L.Browser.svg || !L.Browser.vml ? L.Path : L.Path.extend({
 		CLIP_PADDING: 0.02
 	},
 
+	bringToFront: function () {
+		var path = this._container;
+
+		if (path && root.parentNode.lastChild !== path) {
+			path.parentNode.appendChild(path);
+		}
+		return this;
+	},
+
+	bringToBack: function () {
+		var path = this._container;
+
+		if (path && path.parentNode.firstChild !== path) {
+			path.parentNode.insertBefore(path, path.parentNode.firstChild);
+		}
+		return this;
+	},
+
 	_createElement: (function () {
 		try {
 			document.namespaces.add('lvml', 'urn:schemas-microsoft-com:vml');
