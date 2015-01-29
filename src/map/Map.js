@@ -128,11 +128,15 @@ L.Map = L.Class.extend({
 
 	setMaxBounds: function (bounds) {
 		bounds = L.latLngBounds(bounds);
+        
+        if (this.options.maxBounds) {
+            this.off('moveend', this._panInsideMaxBounds, this);
+        }
 
 		this.options.maxBounds = bounds;
-
+        
 		if (!bounds) {
-			return this.off('moveend', this._panInsideMaxBounds, this);
+			return this;
 		}
 
 		if (this._loaded) {
