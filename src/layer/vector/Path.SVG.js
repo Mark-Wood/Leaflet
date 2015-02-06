@@ -170,9 +170,9 @@ L.Map.include({
 			var defs = L.Path.prototype._createElement('defs');
 			this._pathRoot.appendChild(defs);
 			
-			defs.appendChild(this._createMarkerArrow('leftMarkerArrow', '#483D8B'));
-			defs.appendChild(this._createMarkerArrow('rightMarkerArrow', '#2E8B57'));
-			defs.appendChild(this._createMarkerArrow('straightMarkerArrow', '#000'));
+			defs.appendChild(this._createMarkerArrow('purpleMarkerArrow', '#483D8B'));
+			defs.appendChild(this._createMarkerArrow('greenMarkerArrow', '#2E8B57'));
+			defs.appendChild(this._createMarkerArrow('blackMarkerArrow', '#000'));
 
 			if (this.options.zoomAnimation && L.Browser.any3d) {
 				L.DomUtil.addClass(this._pathRoot, 'leaflet-zoom-animated');
